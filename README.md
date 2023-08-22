@@ -30,7 +30,7 @@ Then add this dependency to your app's build.gradle file
 
 ```groovy
 dependencies {
-    implementation 'com.github.akardas16:Alerter:1.0.5'
+    implementation 'com.github.akardas16:Alerter:1.0.6'
 }
 ```
 
