@@ -1,4 +1,4 @@
-package com.akardas16.alerter
+package com.akardas16.tapadoalert
 
 import org.junit.Test
 

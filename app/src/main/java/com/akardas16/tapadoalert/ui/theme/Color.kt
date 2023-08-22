@@ -1,4 +1,4 @@
-package com.akardas16.alerter.ui.theme
+package com.akardas16.tapadoalert.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
