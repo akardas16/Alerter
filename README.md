@@ -1,7 +1,7 @@
 # Alerter
-TapadoAlert for Jatpack Compose
 
-# Alerter - An Android Alerter Library, now in Jatpack Compose!
+# Alerter - An Android Alerter Library, 
+# now in Jatpack Compose!
 
 This library aims to overcome the limitations of Toasts and Snackbars, while reducing the
 complexity of your layouts.
@@ -58,10 +58,8 @@ dependencies {
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically) {
 
-
                     Icon(imageVector = Icons.Rounded.Notifications, contentDescription = "",
                         tint = Color.White, modifier = Modifier.padding(start = 12.dp).iconPulse())
-
 
                     Column(modifier = Modifier.padding(horizontal = 12.dp)) {
                         Text(text = "Alert Title", color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
