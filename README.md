@@ -36,6 +36,20 @@ dependencies {
 
 # Usage
 
+#### Basic Usage
+
+```kotlin
+ var showAlert by remember { mutableStateOf(false) }
+
+ Alerter(isShown = showAlert, onChanged = {showAlert = it}) {
+
+                //Your Custom Content
+
+            }
+```
+
+<br />
+
  * Use `modifier = Modifier.iconPulse()` for icon pulse effect 
   <p align="center">
    Alerter with icon, title and message
