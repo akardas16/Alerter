@@ -173,13 +173,13 @@ dependencies {
 
   ```Kotlin
 isShown: Boolean, onChanged: (isShown: Boolean) -> Unit,
-    backgroundColor: Color = Color.Transparent,
-    duration:Long = 3000,
-    enableVibration:Boolean = true,
-    enableSwipeToDismiss:Boolean = false,
-    disableOutsideTouch:Boolean = false,
-    enableInfiniteDuration:Boolean = false,
-    gravity: Int = Gravity.TOP,
+    backgroundColor: Color = Color.Transparent, // background color of alerter
+    duration:Long = 3000, // Alerter duration
+    enableVibration:Boolean = true, // enable/disable vibration
+    enableSwipeToDismiss:Boolean = false, // enable/disable swipe to dismiss
+    disableOutsideTouch:Boolean = false,  // enable/disable outside touch of alert
+    enableInfiniteDuration:Boolean = false, // enable/disable infinite duration
+    gravity: Int = Gravity.TOP,  // change alerter gravity TOP, BOTTOM, CENTER
     content: @Composable () -> Unit,
 ```
 
