@@ -1,14 +1,13 @@
-# Alerter
+## Alerter - An Android Alerter Library, now in Jatpack Compose!
 
-# Alerter - An Android Alerter Library, 
-# now in Jatpack Compose!
 
 This library aims to overcome the limitations of Toasts and Snackbars, while reducing the
 complexity of your layouts.
 
-[![API](https://img.shields.io/badge/API-14%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=14) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Alerter-blue.svg?style=flat)](https://android-arsenal.com/details/1/5302) [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23245-blue.svg)](http://androidweekly.net/issues/issue-245)
+This library originated from [Tapado Alerter](https://github.com/Tapadoo/Alerter) and modified to make proper usage for **Jatpack Compose**.
 
-![Header](./documentation/header.png)
+
+![Header](https://github.com/akardas16/Alerter/assets/28716129/d7ed8e90-b455-42a8-82e1-bd964c859858)
 
 ## General
 
@@ -70,207 +69,90 @@ dependencies {
             }
 ```
 
-Or from a Fragment -
+
+
+<br />
+<br />
+
+ * `backgroundColor = Color.Transparent` will seperate UI from status bar.
+ * By default value is  `backgroundColor = Color.Transparent` (see below example)
+  <p align="center">
+   Alerter with Coil image library
+  </p>
+ <p align="center">
+ <img align="center" src="https://github.com/akardas16/Alerter/assets/28716129/124029d2-7f16-48d0-b6eb-2c0e271fd7d4" width="400">
+</p>
+
+ 
 
 ```kotlin
-Alerter.create(activity)
-       .setTitle("Alert Title")
-       .setText("Alert text...")
-       .show()
+ var showAlert by remember { mutableStateOf(false) }
+
+ Alerter(isShown = showAlert, onChanged = { showAlert = it }, backgroundColor = Color.Transparent) {
+
+                Row(modifier = Modifier.fillMaxWidth().fillMaxHeight()
+                        .background(Color(0xFFE2E1E1),shape = RoundedCornerShape(15.dp))
+                        .padding(vertical = 16.dp),
+                    horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
+
+                    //Coil
+                    AsyncImage(model = "image url",
+                        contentDescription = "person", contentScale = ContentScale.Crop,
+                        modifier = Modifier.padding(start = 24.dp)
+                            .size(48.dp).clip(CircleShape))
+
+                    Column(modifier = Modifier.padding(horizontal = 12.dp)) {
+
+                        Text(text = "Jane Clark",
+                            color = Color.Black.copy(0.7f), fontWeight = FontWeight.SemiBold)
+
+                        Text(text = "You have new message",
+                            color = Color.Black.copy(0.7f), fontSize = 14.sp)
+
+                    }
+
+                }
+            }
 ```
 
-To check if an alert is showing - 
+<br />
+<br />
+
+
+
+ <p align="center">
+ <img align="center" src="https://github.com/akardas16/Alerter/assets/28716129/aff9ded7-06c8-470e-991d-5009fe0a43d0" width="400">
+</p>
 
 
 ```kotlin
-Alerter.isShowing()
+ var showAlert by remember { mutableStateOf(false) }
+
+ Alerter(isShown = showAlert, onChanged = {showAlert = it}, backgroundColor = Color.Transparent) {
+
+                Row(modifier = Modifier.fillMaxWidth().fillMaxHeight()
+                    .background(Color(0xFF9499FF), shape = RoundedCornerShape(18.dp))
+                    .padding(vertical = 16.dp),
+                    horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
+
+                    Icon(painter = painterResource(id = R.drawable.gift_icon), contentDescription = "",
+                        tint = Color.Unspecified, modifier = Modifier.padding(start = 24.dp).size(48.dp))
+
+                    Column(modifier = Modifier.padding(horizontal = 12.dp)) {
+                        Text(text = "Gift", color = Color.White, fontWeight = FontWeight.SemiBold)
+                        Text(text = "Claim your gift!", color = Color.White, fontSize = 14.sp)
+                    }
+
+                    Spacer(modifier = Modifier.weight(1f))
+                    Button(onClick = { showAlert4 = !showAlert4 },
+                        shape = RoundedCornerShape(8.dp), colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFF4C52C7), contentColor = Color.White),
+                        modifier = Modifier.padding(end = 24.dp)) {
+                        Text(text = "Claim")
+                    }
+                }
+            }
 ```
 
-To hide a currently showing Alert - 
 
-```kotlin
-Alerter.hide()
-```
 
-# Customisation
-
-### Background Colour
-
-```kotlin
-Alerter.create(this@DemoActivity)
-       .setTitle("Alert Title")
-       .setText("Alert text...")
-       .setBackgroundColorRes(R.color.colorAccent) // or setBackgroundColorInt(Color.CYAN)
-       .show()
-```
-
-![Coloured Alert](./documentation/alert_coloured.gif)
-
-### Icon
-
-```kotlin
-Alerter.create(this@DemoActivity)
-       .setText("Alert text...")
-       .setIcon(R.drawable.alerter_ic_mail_outline)
-       .setIconColorFilter(0) // Optional - Removes white tint
-       .setIconSize(R.dimen.custom_icon_size) // Optional - default is 38dp
-       .show()
-```
-
-![Custom Icon Alert](./documentation/alert_icon.gif)
-
-### On screen duration, in milliseconds
-
-```kotlin
-Alerter.create(this@DemoActivity)
-       .setTitle("Alert Title")
-       .setText("Alert text...")
-       .setDuration(10000)
-       .show()
-```
-
-### Without title
-
-```kotlin
-Alerter.create(this@DemoActivity)
-       .setText("Alert text...")
-       .show()
-```
-
-![Text Only Alert](./documentation/alert_text_only.gif)
-
-### Adding an On Click Listener
-
-```kotlin
- Alerter.create(this@DemoActivity)
-        .setTitle("Alert Title")
-        .setText("Alert text...")
-        .setDuration(10000)
-        .setOnClickListener(View.OnClickListener {
-            Toast.makeText(this@DemoActivity, "OnClick Called", Toast.LENGTH_LONG).show();
-        })
-        .show()
-```
-
-![On Click Alert](./documentation/alert_on_click.gif)
-
-### Verbose text
-
-```kotlin
- Alerter.create(this@DemoActivity)
-        .setTitle("Alert Title")
-        .setText("The alert scales to accommodate larger bodies of text. " +
-                 "The alert scales to accommodate larger bodies of text. " +
-                 "The alert scales to accommodate larger bodies of text.")
-        .show()
-```
-
-![Verbose Alert](./documentation/alert_verbose.gif)
-
-### Custom Enter/Exit Animations
-
-```kotlin
-  Alerter.create(this@KotlinDemoActivity)
-         .setTitle("Alert Title")
-         .setText("Alert text...")
-         .setEnterAnimation(R.anim.alerter_slide_in_from_left)
-         .setExitAnimation(R.anim.alerter_slide_out_to_right)
-         .show()
-```
-
-### Visibility Callbacks
-
-```kotlin
- Alerter.create(this@KotlinDemoActivity)
-        .setTitle("Alert Title")
-        .setText("Alert text...")
-        .setDuration(10000)
-        .setOnShowListener(OnShowAlertListener {
-            Toast.makeText(this@KotlinDemoActivity, "Show Alert", Toast.LENGTH_LONG).show()
-        })
-        .setOnHideListener(OnHideAlertListener {
-            Toast.makeText(this@KotlinDemoActivity, "Hide Alert", Toast.LENGTH_LONG).show()
-        })
-        .show()
-```
-
-### Custom Fonts and Text Appearance
-
-```kotlin 
- Alerter.create(this@DemoActivity)
-        .setTitle("Alert Title")
-        .setTitleAppearance(R.style.AlertTextAppearance_Title)
-        .setTitleTypeface(Typeface.createFromAsset(getAssets(), "Pacifico-Regular.ttf"))
-        .setText("Alert text...")
-        .setTextAppearance(R.style.AlertTextAppearance_Text)
-        .setTextTypeface(Typeface.createFromAsset(getAssets(), "ScopeOne-Regular.ttf"))
-        .show()
-```
-
-![Verbose Alert](./documentation/alert_custom_font.gif)
-
-### Swipe to Dismiss
-
-```kotlin
- Alerter.create(this@DemoActivity)
-        .setTitle("Alert Title")
-        .setText("Alert text...")
-        .enableSwipeToDismiss()
-        .show()
-```
-![Verbose Alert](./documentation/alert_swipe_to_dismiss.gif)
-
-### Progress Bar
-
-```kotlin
- Alerter.create(this@DemoActivity)
-        .setTitle("Alert Title")
-        .setText("Alert text...")
-        .enableProgress(true)
-        .setProgressColorRes(R.color.colorAccent)
-        .show()
-```
-
-![Verbose Alert](./documentation/alert_progress_bar.gif)
-
-### With Buttons
-
-```kotlin
- Alerter.create(this@KotlinDemoActivity)
-        .setTitle(R.string.title_activity_example)
-        .setText("Alert text...")
-        .addButton("Okay", R.style.AlertButton, View.OnClickListener {
-            Toast.makeText(this@KotlinDemoActivity, "Okay Clicked", Toast.LENGTH_LONG).show()
-        })
-        .addButton("No", R.style.AlertButton, View.OnClickListener {
-            Toast.makeText(this@KotlinDemoActivity, "No Clicked", Toast.LENGTH_LONG).show()
-        })
-        .show()
-```
-
-![Verbose Alert](./documentation/alert_with_buttons.gif)
-
-### With Custom Layout
-```kotlin
- Alerter.create(this@KotlinDemoActivity, R.layout.custom_layout)
-        .setBackgroundColorRes(R.color.colorAccent)
-        .also { alerter ->
-            val tvCustomView = alerter.getLayoutContainer()?.tvCustomLayout
-            tvCustomView?.setText(R.string.with_custom_layout)
-        }
-        .show()
-```
-
-![Verbose Alert](./documentation/alert_with_custom_layout.gif)
-
-# Contributing & Reporting Issues
-
-[Please read this if you're reporting an issue, or thinking of contributing!](./CONTRIBUTING.md)
-
-## Licence
-
-See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
-
-Copyright 2017 Tapadoo, Dublin.
-
-<img src="https://2upm2b1wdft320vzjj34rpga-wpengine.netdna-ssl.com/wp-content/uploads/2019/12/logo-tapadoo-dark.png" width="200"/>
