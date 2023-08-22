@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -60,7 +61,7 @@ fun MyContent(){
     var showAlert1 by remember { mutableStateOf(false) }
     var showAlert2 by remember { mutableStateOf(false) }
     var showAlert3 by remember { mutableStateOf(false) }
-    var showAlert4 by remember { mutableStateOf(false) }
+    var showAlert4 by remember { mutableStateOf(true) }
     var showAlert5 by remember { mutableStateOf(false) }
     var showAlert6 by remember { mutableStateOf(false) }
 
@@ -132,7 +133,7 @@ fun MyContent(){
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically) {
 
-                        Icon(painter = painterResource(id = com.akardas16.alerter.R.drawable.globe_world_icon), contentDescription = "",
+                        Icon(painter = painterResource(id = R.drawable.globe_world_icon), contentDescription = "",
                             tint = Color.White, modifier = Modifier.size(20.dp))
                         Text(text = "No connection!", color = Color.White, fontSize = 14.sp,
                             modifier = Modifier.padding(start = 12.dp))
@@ -149,8 +150,8 @@ fun MyContent(){
                     .fillMaxWidth()
                     .fillMaxHeight()
                     .background(
-                        Color(0xFFAB33FF),
-                        shape = RoundedCornerShape(15.dp)
+                        Color(0xFF9499FF),
+                        shape = RoundedCornerShape(18.dp)
                     )
                     .padding(vertical = 16.dp),
                     horizontalArrangement = Arrangement.Start,
@@ -170,7 +171,7 @@ fun MyContent(){
                     Spacer(modifier = Modifier.weight(1f))
                     Button(onClick = { showAlert4 = !showAlert4 },
                         shape = RoundedCornerShape(8.dp), colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFF39C12), contentColor = Color.White
+                            containerColor = Color(0xFF4C52C7), contentColor = Color.White
                         ),
                         modifier = Modifier.padding(horizontal = 10.dp)) {
                         Text(text = "Claim")
@@ -194,6 +195,35 @@ fun MyContent(){
                 }
             }
 
+
+            Alerter(isShown = showAlert6, onChanged = {showAlert6 = it},
+                backgroundColor = Color.Transparent
+            ) {
+                Column(modifier = Modifier
+                    .fillMaxHeight()
+                    .background(Color.Transparent), verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally) {
+
+                    Row(modifier = Modifier
+                        .fillMaxHeight()
+                        .background(
+                            Color(0xFF2FE04D),
+                            shape = CircleShape
+                        )
+                        .padding(vertical = 8.dp, horizontal = 24.dp),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically) {
+
+                        Icon(painter = painterResource(id = R.drawable.globe_world_icon), contentDescription = "",
+                            tint = Color.White, modifier = Modifier.size(20.dp))
+                        Text(text = "Connection restored", color = Color.White, fontSize = 14.sp,
+                            modifier = Modifier.padding(start = 12.dp))
+
+                    }
+                }
+
+            }
+
             Button {
                 showAlert1 = showAlert1.not()
             }
@@ -212,6 +242,10 @@ fun MyContent(){
 
             Button {
                 showAlert5 = showAlert5.not()
+            }
+
+            Button {
+                showAlert6 = showAlert6.not()
             }
 
 
