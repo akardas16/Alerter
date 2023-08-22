@@ -155,5 +155,19 @@ dependencies {
             }
 ```
 
+*  See available parameters
 
+  ```Kotlin
+isShown: Boolean, onChanged: (isShown: Boolean) -> Unit,
+    backgroundColor: Color = Color.Transparent,
+    duration:Long = 3000,
+    enableVibration:Boolean = true,
+    enableSwipeToDismiss:Boolean = false,
+    disableOutsideTouch:Boolean = false,
+    enableInfiniteDuration:Boolean = false,
+    gravity: Int = Gravity.TOP,
+    content: @Composable () -> Unit,
+```
 
+### Want to try library quickly?
+* Paste [`MainActivity.kt`](https://github.com/akardas16/Alerter/blob/master/app/src/main/java/com/akardas16/tapadoalert/MainActivity.kt) file to your project and see Examples on preview (You may need drawable icons and Coil image library)
