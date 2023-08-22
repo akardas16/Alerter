@@ -121,8 +121,9 @@ dependencies {
 
 
  <p align="center">
- <img align="center" src="https://github.com/akardas16/Alerter/assets/28716129/aff9ded7-06c8-470e-991d-5009fe0a43d0" width="400">
+ <img align="center" src="https://github.com/akardas16/Alerter/assets/28716129/1f49c596-ee0d-4df8-9181-2229c8472a4c" width="400">
 </p>
+
 
 
 ```kotlin
