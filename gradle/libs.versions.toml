@@ -1,5 +1,6 @@
 [versions]
 agp = "8.2.0-alpha14"
+alerter = "1.0.4"
 coil-compose = "2.4.0"
 kotlin = "1.8.10"
 core-ktx = "1.9.0"
@@ -13,6 +14,7 @@ appcompat = "1.6.1"
 material = "1.9.0"
 
 [libraries]
+alerter = { module = "com.github.akardas16:Alerter", version.ref = "alerter" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
