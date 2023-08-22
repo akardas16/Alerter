@@ -3,7 +3,16 @@ package com.akardas16.tapadoalert
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +25,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material.icons.rounded.NotificationsActive
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -24,15 +34,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -43,6 +57,7 @@ import coil.compose.AsyncImage
 import com.akardas16.alerter.R
 import com.akardas16.tapadoalert.ui.theme.AlerterTheme
 import com.tapadoo.alerter.Alerter
+import com.tapadoo.alerter.iconPulse
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,9 +76,10 @@ fun MyContent(){
     var showAlert1 by remember { mutableStateOf(false) }
     var showAlert2 by remember { mutableStateOf(false) }
     var showAlert3 by remember { mutableStateOf(false) }
-    var showAlert4 by remember { mutableStateOf(true) }
+    var showAlert4 by remember { mutableStateOf(false) }
     var showAlert5 by remember { mutableStateOf(false) }
     var showAlert6 by remember { mutableStateOf(false) }
+    var showAlert7 by remember { mutableStateOf(true) }
 
     Surface(modifier = Modifier.fillMaxSize()) {
 
@@ -183,14 +199,15 @@ fun MyContent(){
             }
 
             Alerter(isShown = showAlert5, onChanged = {showAlert5 = it},
-                backgroundColor =  Color(0xFFE2E1E1)
+                backgroundColor =  Color(0xFFE2E1E1), duration = 6000
             ) {
                 Column(modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight(), verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally) {
 
-                    Icon(imageVector = Icons.Rounded.NotificationsActive, contentDescription = "", tint = Color.Black.copy(0.7f))
+                    Icon(imageVector = Icons.Rounded.NotificationsActive, contentDescription = "",
+                        tint = Color.Black.copy(0.7f), modifier = Modifier.iconPulse())
                     Text(text = "You have new suggestions", color = Color.Black.copy(0.7f), fontSize = 14.sp)
                 }
             }
@@ -224,6 +241,31 @@ fun MyContent(){
 
             }
 
+            Alerter(isShown = showAlert7, onChanged = {showAlert7 = it},
+                backgroundColor = Color(0xFFF69346)
+            ) {
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(),
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically) {
+
+                    Spacer(modifier = Modifier.padding(start = 12.dp))
+
+                    Icon(imageVector = Icons.Rounded.Notifications, contentDescription = "",
+                        tint = Color.White, modifier = Modifier.iconPulse())
+
+
+                    Column(modifier = Modifier.padding(horizontal = 12.dp)) {
+                        Text(text = "Alert Title", color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
+                        Text(text = "Alert text...", color = Color.White, fontSize = 14.sp)
+
+                    }
+
+
+                }
+            }
+
             Button {
                 showAlert1 = showAlert1.not()
             }
@@ -246,6 +288,10 @@ fun MyContent(){
 
             Button {
                 showAlert6 = showAlert6.not()
+            }
+
+            Button {
+                showAlert7 = showAlert7.not()
             }
 
 
