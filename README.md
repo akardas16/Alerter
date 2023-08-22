@@ -1,7 +1,7 @@
 # Alerter
 TapadoAlert for Jatpack Compose
 
-# Alerter - An Android Alerter Library, now in Kotlin!
+# Alerter - An Android Alerter Library, now in Jatpack Compose!
 
 This library aims to overcome the limitations of Toasts and Snackbars, while reducing the
 complexity of your layouts.
@@ -31,21 +31,45 @@ Then add this dependency to your app's build.gradle file
 
 ```groovy
 dependencies {
-    implementation 'com.github.tapadoo:alerter:$current-version'
+    implementation 'com.github.akardas16:Alerter:1.0.5'
 }
 ```
 
 # Usage
 
-![Default Alert](./documentation/alert_default.gif)
+ * Use `modifier = Modifier.iconPulse()` for icon pulse effect 
+  <p align="center">
+   Alerter with icon, title and message
+  </p>
+ <p align="center">
+ <img align="center" src="https://github.com/akardas16/Alerter/assets/28716129/7e036b7f-b024-44af-b8ac-0d5c3a8cd240" width="400">
+</p>
 
-From an Activity -
+ 
 
 ```kotlin
-Alerter.create(this@DemoActivity)
-       .setTitle("Alert Title")
-       .setText("Alert text...")
-       .show()
+ var showAlert by remember { mutableStateOf(false) }
+
+ Alerter(isShown = showAlert, onChanged = {showAlert = it},
+                backgroundColor = Color(0xFFF69346)) {
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(),
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically) {
+
+
+                    Icon(imageVector = Icons.Rounded.Notifications, contentDescription = "",
+                        tint = Color.White, modifier = Modifier.padding(start = 12.dp).iconPulse())
+
+
+                    Column(modifier = Modifier.padding(horizontal = 12.dp)) {
+                        Text(text = "Alert Title", color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
+                        Text(text = "Alert text...", color = Color.White, fontSize = 14.sp)
+
+                    }
+                }
+            }
 ```
 
 Or from a Fragment -
