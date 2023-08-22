@@ -299,7 +299,6 @@ class Alert @JvmOverloads constructor(context: Context,
         startHideAnimation()
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private fun startHideAnimation() {
         //Start the Handler to clean up the Alert
         if (!enableInfiniteDuration) {
