@@ -98,9 +98,8 @@ fun MyContent(){
                 }
             }
 
-            Alerter(isShown = showAlert2, onChanged = {showAlert2 = it},
-                backgroundColor = Color.Transparent
-            ) {
+            Alerter(isShown = showAlert2, onChanged = { showAlert2 = it },
+                backgroundColor = Color.Transparent) {
                 Row(modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
@@ -112,20 +111,26 @@ fun MyContent(){
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically) {
 
-                    Spacer(modifier = Modifier.padding(start = 24.dp))
+                    //Coil
                     AsyncImage(model = "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cq_auto:eco%2Cw_1200/MTk4MDQzMTI5NzY3NTM1ODA2/short-captions-for-profile-pictures.png",
                         contentDescription = "person", contentScale = ContentScale.Crop,
                         modifier = Modifier
+                            .padding(start = 24.dp)
                             .size(48.dp)
-                            .clip(CircleShape))
-
+                            .clip(CircleShape)
+                    )
 
                     Column(modifier = Modifier.padding(horizontal = 12.dp)) {
-                        Text(text = "Jane Clark", color = Color.Black.copy(0.7f), fontWeight = FontWeight.SemiBold)
-                        Text(text = "You have new message", color = Color.Black.copy(0.7f), fontSize = 14.sp)
+
+                        Text(text = "Jane Clark",
+                            color = Color.Black.copy(0.7f),
+                            fontWeight = FontWeight.SemiBold)
+
+                        Text(text = "You have new message",
+                            color = Color.Black.copy(0.7f),
+                            fontSize = 14.sp)
 
                     }
-
 
                 }
             }
@@ -160,22 +165,21 @@ fun MyContent(){
             }
 
 
-            Alerter(isShown = showAlert4, onChanged = {showAlert4 = it},
-                backgroundColor = Color.Transparent) {
+
+            Alerter(isShown = showAlert4, onChanged = {showAlert4 = it}, backgroundColor = Color.Transparent) {
+
                 Row(modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
-                    .background(
-                        Color(0xFF9499FF),
-                        shape = RoundedCornerShape(18.dp)
-                    )
+                    .background(Color(0xFF9499FF), shape = RoundedCornerShape(18.dp))
                     .padding(vertical = 16.dp),
-                    horizontalArrangement = Arrangement.Start,
-                    verticalAlignment = Alignment.CenterVertically) {
+                    horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
 
-                    Spacer(modifier = Modifier.padding(start = 24.dp))
+
                     Icon(painter = painterResource(id = R.drawable.gift_icon), contentDescription = "",
-                        tint = Color.Unspecified, modifier = Modifier.size(48.dp))
+                        tint = Color.Unspecified, modifier = Modifier
+                            .padding(start = 24.dp)
+                            .size(48.dp))
 
                     Column(modifier = Modifier.padding(horizontal = 12.dp)) {
                         Text(text = "Gift", color = Color.White, fontWeight = FontWeight.SemiBold)
@@ -187,13 +191,11 @@ fun MyContent(){
                     Spacer(modifier = Modifier.weight(1f))
                     Button(onClick = { showAlert4 = !showAlert4 },
                         shape = RoundedCornerShape(8.dp), colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF4C52C7), contentColor = Color.White
-                        ),
-                        modifier = Modifier.padding(horizontal = 10.dp)) {
+                            containerColor = Color(0xFF4C52C7), contentColor = Color.White),
+                        modifier = Modifier.padding(end = 24.dp)) {
                         Text(text = "Claim")
                     }
 
-                    Spacer(modifier = Modifier.padding(start = 24.dp))
 
                 }
             }
@@ -242,18 +244,18 @@ fun MyContent(){
             }
 
             Alerter(isShown = showAlert7, onChanged = {showAlert7 = it},
-                backgroundColor = Color(0xFFF69346)
-            ) {
+                backgroundColor = Color(0xFFF69346)) {
                 Row(modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight(),
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically) {
 
-                    Spacer(modifier = Modifier.padding(start = 12.dp))
 
                     Icon(imageVector = Icons.Rounded.Notifications, contentDescription = "",
-                        tint = Color.White, modifier = Modifier.iconPulse())
+                        tint = Color.White, modifier = Modifier
+                            .padding(start = 12.dp)
+                            .iconPulse())
 
 
                     Column(modifier = Modifier.padding(horizontal = 12.dp)) {

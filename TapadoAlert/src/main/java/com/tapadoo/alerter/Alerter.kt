@@ -121,14 +121,11 @@ class Alerter private constructor() {
 
 
 
-    /**
-     * Sets the Alert Hidden Listener
-     *
-     * @param listener OnHideAlertListener of Alert
-     * @return This Alerter
-     */
-    fun setOnHideListener(listener: OnHideAlertListener): Alerter {
-        alert?.onHideListener = listener
+
+    fun listenAlertStatus(status:(isShown:Boolean) -> Unit): Alerter {
+        alert?.status = {
+            status(it)
+        }
 
         return this
     }
@@ -261,14 +258,14 @@ class Alerter private constructor() {
          */
         @JvmStatic
         @JvmOverloads
-        fun clearCurrent(activity: Activity?, dialog: Dialog?, listener: OnHideAlertListener? = null) {
+        fun clearCurrent(activity: Activity?, dialog: Dialog?, statusAlert:(isShown:Boolean) -> Unit? = {}) {
             dialog?.let {
                 it.window?.decorView as? ViewGroup
             } ?: kotlin.run {
                 activity?.window?.decorView as? ViewGroup
             }?.also {
-                removeAlertFromParent(it, listener)
-            } ?: listener?.onHide()
+                removeAlertFromParent(it, statusAlert)
+            } ?: statusAlert(false)
         }
 
         /**
@@ -280,8 +277,8 @@ class Alerter private constructor() {
          */
         @JvmStatic
         @JvmOverloads
-        fun clearCurrent(activity: Activity?, listener: OnHideAlertListener? = null) {
-            clearCurrent(activity, null, listener)
+        fun clearCurrent(activity: Activity?, statusAlert:(isShown:Boolean) -> Unit? = {}) {
+            clearCurrent(activity, null, statusAlert)
         }
 
         /**
@@ -290,18 +287,18 @@ class Alerter private constructor() {
          */
         @JvmStatic
         @JvmOverloads
-        fun hide(listener: OnHideAlertListener? = null) {
+        fun hide(statusAlert:(isShown:Boolean) -> Unit? = {}) {
             decorView?.get()?.let {
-                removeAlertFromParent(it, listener)
-            } ?: listener?.onHide()
+                removeAlertFromParent(it, statusAlert)
+            } ?: statusAlert(false)
         }
 
-        private fun removeAlertFromParent(decorView: ViewGroup, listener: OnHideAlertListener?) {
+        private fun removeAlertFromParent(decorView: ViewGroup, statusAlert:(isShown:Boolean) -> Unit?) {
             //Find all Alert Views in Parent layout
             for (i in 0..decorView.childCount) {
                 val childView = if (decorView.getChildAt(i) is Alert) decorView.getChildAt(i) as Alert else null
                 if (childView != null && childView.windowToken != null) {
-                    ViewCompat.animate(childView).alpha(0f).withEndAction(getRemoveViewRunnable(childView, listener))
+                    ViewCompat.animate(childView).alpha(0f).withEndAction(getRemoveViewRunnable(childView, statusAlert))
                 }
             }
         }
@@ -323,12 +320,12 @@ class Alerter private constructor() {
                 return isShowing
             }
 
-        private fun getRemoveViewRunnable(childView: Alert?, listener: OnHideAlertListener?): Runnable {
+        private fun getRemoveViewRunnable(childView: Alert?, statusAlert:(isShown:Boolean) -> Unit?): Runnable {
             return Runnable {
                 childView?.let {
                     (childView.parent as? ViewGroup)?.removeView(childView)
                 }
-                listener?.onHide()
+                statusAlert(false)
             }
         }
     }

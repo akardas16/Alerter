@@ -46,8 +46,6 @@ class Alert @JvmOverloads constructor(context: Context,
                                       defStyle: Int = 0)
     : FrameLayout(context, attrs, defStyle), View.OnClickListener, Animation.AnimationListener, SwipeDismissTouchListener.DismissCallbacks {
 
-    private var onShowListener: OnShowAlertListener? = null
-    internal var onHideListener: OnHideAlertListener? = null
     internal var status:(onShowAlert:Boolean) -> Unit = {}
 
     internal var enterAnimation: Animation = AnimationUtils.loadAnimation(context, R.anim.alerter_slide_in_from_top)
@@ -228,7 +226,6 @@ class Alert @JvmOverloads constructor(context: Context,
     }
 
     override fun onAnimationEnd(animation: Animation) {
-        onShowListener?.onShow()
         status(true)
 
         startHideAnimation()
@@ -289,7 +286,7 @@ class Alert @JvmOverloads constructor(context: Context,
                         try {
                             (parent as ViewGroup).removeView(this@Alert)
 
-                            onHideListener?.onHide()
+                           // onHideListener?.onHide()
                             status(false)
                         } catch (ex: Exception) {
                             Log.e(javaClass.simpleName, "Cannot remove from parent layout")

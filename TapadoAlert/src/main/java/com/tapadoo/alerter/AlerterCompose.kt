@@ -59,7 +59,9 @@ fun Alerter(
                         }
                     }
                 }
-                .setOnHideListener { onChanged(false) }
+                .listenAlertStatus {
+                    if (it.not()) onChanged(false)
+                }
                 .setDuration(duration)
                 .show()
         } else {
