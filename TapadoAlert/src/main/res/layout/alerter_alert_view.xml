@@ -4,6 +4,7 @@
     android:id="@+id/flClickShield"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/transparent"
     android:clickable="false">
 
@@ -21,20 +22,20 @@
         android:paddingBottom="@dimen/alerter_padding_default"
         tools:visibility="visible">
 
-        <ViewStub
-            android:id="@+id/vAlertContentContainer"
-			android:inflatedId="@+id/vAlertContentContainer"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/plant_detail_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-			tools:layout="@layout/alerter_alert_default_layout"
-			tools:visibility="visible" />
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:id="@+id/llButtonContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:orientation="horizontal" />
+            <androidx.compose.ui.platform.ComposeView
+                android:id="@+id/compose_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </androidx.core.widget.NestedScrollView>
+
 
     </LinearLayout>
 

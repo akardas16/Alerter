@@ -30,7 +30,7 @@ fun Alerter(
     LaunchedEffect(key1 = isShown) {
 
         if (isShown) {
-            Alerter.create(context as Activity, R.layout.alerter_compose)
+            Alerter.create(context as Activity)
                 .enableVibration(enableVibration)
                 .enableSwipeToDismiss(enableSwipeToDismiss)
                 .enableInfiniteDuration(enableInfiniteDuration)
@@ -38,8 +38,7 @@ fun Alerter(
                 .disableOutsideTouch(disableOutsideTouch)
                 .setBackgroundColorInt(backgroundColor.toArgb())
                 .also { alerter ->
-                    val view = alerter.getLayoutContainer()
-                    view?.findViewById<ComposeView>(R.id.compose_view)?.apply {
+                    alerter.layoutComposeView()?.apply {
                         setViewCompositionStrategy(
                             ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
                         )
