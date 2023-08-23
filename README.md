@@ -4,7 +4,7 @@
 This library aims to overcome the limitations of Toasts and Snackbars, while reducing the
 complexity of your layouts.
 
-This library originated from [Tapado Alerter](https://github.com/Tapadoo/Alerter) and modified to make proper usage for **Jatpack Compose**.
+This library originated from [Tapado Alerter](https://github.com/Tapadoo/Alerter) and modified to make proper usage for **Jetpack Compose**.
 
 
 ![Header](https://github.com/akardas16/Alerter/assets/28716129/d7ed8e90-b455-42a8-82e1-bd964c859858)
