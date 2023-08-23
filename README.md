@@ -1,4 +1,4 @@
-## Alerter - An Android Alerter Library, now in Jatpack Compose!
+## Alerter - An Android Alerter Library, now in Jetpack Compose!
 
 
 This library aims to overcome the limitations of Toasts and Snackbars, while reducing the
